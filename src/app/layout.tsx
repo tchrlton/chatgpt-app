@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
+import { SessionProvider } from "./components/SessionProvider";
+import UserButton from "./components/UserButton";
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -25,6 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <SessionProvider>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased px-2 md:px-5`}
@@ -34,6 +38,9 @@ export default function RootLayout({
             <Link href="/">GPT Chat</Link>
             <Link href="/about" className="ml-5 font-light">About</Link>
           </div>
+          <div>
+            <UserButton />
+          </div>
         </header>
         <div className="flex flex-col md:flex-row">
           <div className="flex-grow">
@@ -42,5 +49,6 @@ export default function RootLayout({
         </div>
       </body>
     </html>
+    </SessionProvider>
   );
 }
