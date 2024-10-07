@@ -1,14 +1,10 @@
 import NextAuth from "next-auth";
-import NextAuthConfig from "next-auth";
+import { NextAuthConfig } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
-
-interface Profile {
-  login?: string;
-}
 
 const authOptions: NextAuthConfig = {
   callbacks: {
-    async signIn({ profile }: { profile: Profile }) {
+    async signIn({ profile }) {
       // Change this to your username
       return profile?.login === "tchrlton";
     },
