@@ -30,6 +30,7 @@ export async function getCompletion(
   const session = await getServerSession();
   let chatId = id;
   if (!chatId) {
+    // eslint-disable-next-line
     chatId = await createChat(session?.user?.name!,
       messageHistory[0].content,
       messages)
