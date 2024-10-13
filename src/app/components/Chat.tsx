@@ -14,8 +14,6 @@ import Transcript from "./Transcript";
 
 import { Message } from "@/types";
 
-const baseAPIUrl = process.env.NEXT_PUBLIC_URL_API_BASE_URL;
-
 export default function Chat({
   id = null,
   messages: initialMessages = [],
@@ -29,6 +27,8 @@ export default function Chat({
     });
     const [backendData, setBackendData] = useState([{}]);
   const chatId = useRef<number | null>(id);
+
+  const baseAPIUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     fetch(`${baseAPIUrl}/users`).then(
