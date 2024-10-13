@@ -14,7 +14,7 @@ import Transcript from "./Transcript";
 
 import { Message } from "@/types";
 
-import { localAPI } from "@/lib/constants";
+const baseAPIUrl = process.env.NEXT_PUBLIC_URL_API_BASE_URL;
 
 export default function Chat({
   id = null,
@@ -31,7 +31,7 @@ export default function Chat({
   const chatId = useRef<number | null>(id);
 
   useEffect(() => {
-    fetch(`${localAPI}/users`).then(
+    fetch(`${baseAPIUrl}/users`).then(
       response => response.json()
     ).then(
       data => (
