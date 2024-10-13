@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import type { Message as AIMessage } from "ai";
@@ -14,6 +14,8 @@ import Transcript from "./Transcript";
 
 import { Message } from "@/types";
 
+import { localAPI } from "@/lib/constants";
+
 export default function Chat({
   id = null,
   messages: initialMessages = [],
@@ -25,7 +27,18 @@ export default function Chat({
     useChat({
       initialMessages: initialMessages as unknown as AIMessage[],
     });
+    const [backendData, setBackendData] = useState([{}]);
   const chatId = useRef<number | null>(id);
+
+  useEffect(() => {
+    fetch(`${localAPI}/users`).then(
+      response => response.json()
+    ).then(
+      data => (
+        setBackendData(data)
+      )
+    )
+  }, []);
 
   const router = useRouter();
   useEffect(() => {
@@ -45,6 +58,8 @@ export default function Chat({
       }
     })();
   }, [isLoading, messages, router]);
+
+  console.log("backendData", backendData);
 
   return (
     <div className="flex flex-col">
