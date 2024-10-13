@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors({ origin: ['http://localhost:3000', "https://chatgpt-app-thomas-charltons-projects.vercel.app"] }))
+app.use(cors({ origin: ['http://localhost:3000', "https://chatgpt-app-eight-rust.vercel.app"] }))
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, TypeScript Express!');
